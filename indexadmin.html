@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accueil – Traitement Netlify Identity</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", (user) => {
+      if (user) {
+        // Si on a un utilisateur connecté, on nettoie le hash URL
+        if (window.location.hash.includes("confirmation_token")) {
+          history.replaceState(null, null, window.location.pathname);
+        }
+        // Puis redirection vers /admin/
+        window.location.href = "/admin/";
+      } else {
+        // Pas connecté, on écoute l'événement login
+        window.netlifyIdentity.on("login", () => {
+          window.location.href = "/admin/";
+        });
+      }
+    });
+    window.netlifyIdentity.init();
+  } else {
+    console.error("Netlify Identity non chargé");
+  }
+</script>
+
+<p>Chargement…</p>
+
+</body>
+</html>
