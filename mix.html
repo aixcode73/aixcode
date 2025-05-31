@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AIXCODE Confetti</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0; 
+    height: 100vh; 
+    background: #f5f0e6; /* beige crème */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #container {
+    position: relative;
+    text-align: center;
+    color: #b7413f; /* rouge pastel */
+    user-select: none;
+  }
+  h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+  #tsparticles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  button {
+    margin-top: 30px;
+    background: transparent;
+    border: 2px solid #b7413f;
+    color: #b7413f;
+    padding: 12px 32px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.4s, color 0.4s;
+  }
+  button:hover {
+    background: #b7413f;
+    color: #f5f0e6;
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <h1 id="titre">AIXCODE</h1>
+    <button onclick="window.location.href='tel:0689700869'">Réserver un appel : 0689700869</button>
+    <div id="tsparticles"></div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    particles: {
+      number: { value: 0 },
+      color: {
+  value: [
+    "#FF0000", // rouge
+    "#FF7F00", // orange
+    "#FFFF00", // jaune
+    "#00FF00", // vert
+    "#0000FF", // bleu
+    "#4B0082", // indigo
+    "#8F00FF"  // violet
+  ]
+},
+
+      shape: { type: ["circle", "square", "triangle"] },
+      opacity: { value: 1 },
+      size: { value: 7, random: { enable: true, minimumValue: 4 } },
+      move: {
+        enable: true,
+        gravity: { enable: true, acceleration: 9.81 },
+        speed: 15,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: "destroy",
+        decay: 0.1
+      }
+    },
+    detectRetina: true,
+  }).then(container => {
+    const titre = document.getElementById("titre");
+
+    titre.addEventListener("click", () => {
+      // Centre du canvas (position relative à la taille du canvas)
+      const x = container.canvas.size.width / 2;
+      const y = container.canvas.size.height / 2;
+
+      for (let i = 0; i < 30; i++) {
+        container.particles.addParticle({
+          x: x + (Math.random() * 100 - 50),  // dispersion horizontale
+          y: y + (Math.random() * 50 - 25),   // dispersion verticale
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>

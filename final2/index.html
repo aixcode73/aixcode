@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AixCode | Création digitale & développement web</title>
+    
+    <!-- Chargement optimisé des polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuration Tailwind avec les polices -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    heading: ['Poppins', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Optimisation de l'affichage des polices */
+        body {
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.025em;
+        }
+        
+        /* Animation logo moderne pour header */
+        .logo-anim {
+            transition: transform 0.3s ease;
+        }
+        .logo-anim:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Section intro avec fond noir brillant */
+        .intro-section {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Effet de brillance sur le fond */
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .animated-logo {
+            font-size: 4rem;
+            font-weight: 700;
+            display: flex;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+        }
+
+        .animated-letter {
+            color: #3b82f6;
+            text-shadow: 
+                -2px -2px 0 #ffffff,
+                2px -2px 0 #ffffff,
+                -2px 2px 0 #ffffff,
+                2px 2px 0 #ffffff,
+                0 0 20px rgba(59, 130, 246, 0.5);
+            opacity: 0;
+            position: relative;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* Logo header plus petit et simplifié */
+        .header-logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #2563EB;
+            display: flex;
+        }
+
+        .header-letter {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo:hover .header-letter {
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        .header-letter:nth-child(1) { animation-delay: 0.1s; }
+        .header-letter:nth-child(2) { animation-delay: 0.2s; }
+        .header-letter:nth-child(3) { animation-delay: 0.3s; }
+        .header-letter:nth-child(4) { animation-delay: 0.4s; }
+        .header-letter:nth-child(5) { animation-delay: 0.5s; }
+        .header-letter:nth-child(6) { animation-delay: 0.6s; }
+        .header-letter:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Animations pour chaque lettre de l'intro */
+        .animated-letter:nth-child(1) { /* a */
+            animation-name: slideFromTopLeft;
+            animation-delay: 0.5s;
+        }
+        
+        .animated-letter:nth-child(2) { /* i */
+            animation-name: slideFromTop;
+            animation-delay: 0.8s;
+        }
+        
+        .animated-letter:nth-child(3) { /* X */
+            animation-name: slideFromTopRight;
+            animation-delay: 1.1s;
+        }
+        
+        .animated-letter:nth-child(4) { /* C */
+            animation-name: slideFromRight;
+            animation-delay: 1.4s;
+        }
+        
+        .animated-letter:nth-child(5) { /* O */
+            animation-name: slideFromBottomRight;
+            animation-delay: 1.7s;
+        }
+        
+        .animated-letter:nth-child(6) { /* d */
+            animation-name: slideFromBottom;
+            animation-delay: 2s;
+        }
+        
+        .animated-letter:nth-child(7) { /* e */
+            animation-name: slideFromBottomLeft;
+            animation-delay: 2.3s;
+        }
+
+        /* Définition des animations */
+        @keyframes slideFromTopLeft {
+            0% {
+                transform: translate(-300px, -300px) rotate(-180deg) scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromTop {
+            0% {
+                transform: translate(0, -400px) rotate(360deg) scale(0.3);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromTopRight {
+            0% {
+                transform: translate(300px, -300px) rotate(180deg) scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromRight {
+            0% {
+                transform: translate(400px, 0) rotate(-90deg) scale(0.4);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromBottomRight {
+            0% {
+                transform: translate(350px, 350px) rotate(270deg) scale(0.6);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromBottom {
+            0% {
+                transform: translate(0, 400px) rotate(-360deg) scale(0.2);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromBottomLeft {
+            0% {
+                transform: translate(-350px, 350px) rotate(90deg) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Effet de pulsation une fois l'animation terminée */
+        .animated-logo {
+            animation: pulse 3s infinite 4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Texte d'accompagnement qui apparaît après l'animation */
+        .intro-text {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 3.5s forwards;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .animated-logo {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .animated-logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-gray-50">
+    <!-- Header avec logo animé au hover -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="inline-block">
+		<img src="aixcode.png" alt="aiXcode" style="width: 100px;">
+</a>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="font-medium hover:text-primary transition-colors">Accueil</a>
+                    <a href="#services" class="font-medium hover:text-primary transition-colors">Expertises</a>
+                    <a href="#portfolio" class="font-medium hover:text-primary transition-colors">Réalisations</a>
+                    <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors">
+                        Contact
+                    </a>
+                </nav>
+                
+                <button class="md:hidden text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Intro avec logo animé -->
+    <section class="intro-section py-20 md:py-32 min-h-screen flex items-center justify-center">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animated-logo">
+                <span class="animated-letter">a</span>
+                <span class="animated-letter">i</span>
+                <span class="animated-letter">X</span>
+                <span class="animated-letter">C</span>
+                <span class="animated-letter">O</span>
+                <span class="animated-letter">d</span>
+                <span class="animated-letter">e</span>
+            </div>
+            <div class="intro-text">
+                <h2 class="text-2xl md:text-3xl font-heading font-bold mb-4 text-white">
+                    Création digitale sur mesure
+                </h2>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                    Nous transformons vos idées en expériences digitales mémorables
+                </p>
+                <a href="#accueil" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-medium text-lg transition-colors shadow-lg hover:shadow-xl">
+                    Découvrir nos services
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="py-20 md:py-32 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
+                Création digitale <br><span class="text-primary">sur mesure</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10">
+                Nous transformons vos idées en expériences digitales mémorables.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-medium text-lg transition-colors shadow-lg hover:shadow-xl">
+                    Discutons de votre projet
+                </a>
+                <a href="#services" class="border-2 border-primary text-primary hover:bg-blue-50 px-8 py-4 rounded-lg font-medium text-lg transition-colors">
+                    Nos expertises
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full font-medium mb-4">
+                    Nos expertises
+                </span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
+                    Des solutions adaptées à vos besoins
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Une approche globale pour une présence digitale impactante.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="bg-primary p-6 text-white">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Identité visuelle</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-6">
+                            Création complète de votre identité visuelle pour une reconnaissance immédiate.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Logo & charte graphique</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Supports de communication</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Déclinaisons multi-supports</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            En savoir plus
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="bg-primary p-6 text-white">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Développement web</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-6">
+                            Sites web performants et responsives adaptés à tous vos besoins.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Sites vitrine & e-commerce</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Applications web sur mesure</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Optimisation SEO</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            En savoir plus
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="bg-primary p-6 text-white">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Marketing digital</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-6">
+                            Stratégies digitales pour augmenter votre visibilité et vos conversions.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Référencement naturel (SEO)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Publicité en ligne (SEA)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Réseaux sociaux</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            En savoir plus
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</section>
+
+    <!-- Autres sections... -->
+
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary p-2 rounded-lg mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-heading font-bold text-white">AIXCODE</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        18 rue Sir Alfred Garrod<br>
+                        73100 Aix-les-Bains
+                    </p>
+                    <p class="text-gray-400 mb-2">
+                        <a href="tel:+33689700869" class="hover:text-white">06 89 70 08 69</a>
+                    </p>
+                    <p class="text-gray-400 mb-6">
+                        <a href="mailto:contact@aixcode.fr" class="hover:text-white">contact@aixcode.fr</a>
+                    </p>
+                </div>
+                
+                <!-- Colonnes supplémentaires -->
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">
+                    © 2025 AixCode. Tous droits réservés.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white">Mentions légales</a>
+                    <a href="#" class="text-gray-500 hover:text-white">Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

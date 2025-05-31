@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AixCode | Création digitale & développement web</title>
+    
+    <!-- Chargement optimisé des polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuration Tailwind avec les polices -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    heading: ['Poppins', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Optimisation de l'affichage des polices */
+        body {
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            @apply font-heading;
+            letter-spacing: -0.025em;
+        }
+        
+        /* Animation logo moderne */
+        .logo-anim {
+            transition: transform 0.3s ease;
+        }
+        .logo-anim:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-gray-50">
+    <!-- Header avec les nouvelles polices -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="flex items-center logo-anim">
+                    <div class="bg-primary p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <span class="text-xl font-heading font-bold text-primary">AIXCODE</span>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="font-medium hover:text-primary transition-colors">Accueil</a>
+                    <a href="#services" class="font-medium hover:text-primary transition-colors">Expertises</a>
+                    <a href="#portfolio" class="font-medium hover:text-primary transition-colors">Réalisations</a>
+                    <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors">
+                        Contact
+                    </a>
+                </nav>
+                
+                <button class="md:hidden text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="py-20 md:py-32 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
+                Création digitale <br><span class="text-primary">sur mesure</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10">
+                Nous transformons vos idées en expériences digitales mémorables.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-medium text-lg transition-colors shadow-lg hover:shadow-xl">
+                    Discutons de votre projet
+                </a>
+                <a href="#services" class="border-2 border-primary text-primary hover:bg-blue-50 px-8 py-4 rounded-lg font-medium text-lg transition-colors">
+                    Nos expertises
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-blue-100 text-primary px-4 py-2 rounded-full font-medium mb-4">
+                    Nos expertises
+                </span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
+                    Des solutions adaptées à vos besoins
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Une approche globale pour une présence digitale impactante.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="bg-primary p-6 text-white">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold mb-2">Identité visuelle</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-6">
+                            Création complète de votre identité visuelle pour une reconnaissance immédiate.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Logo & charte graphique</span>
+                            </li>
+                            <!-- Autres éléments de liste -->
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                            En savoir plus
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Ajoutez les autres services de la même manière -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Autres sections... -->
+
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary p-2 rounded-lg mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-heading font-bold text-white">AIXCODE</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        18 rue Sir Alfred Garrod<br>
+                        73100 Aix-les-Bains
+                    </p>
+                    <p class="text-gray-400 mb-2">
+                        <a href="tel:+33689700869" class="hover:text-white">06 89 70 08 69</a>
+                    </p>
+                    <p class="text-gray-400 mb-6">
+                        <a href="mailto:contact@aixcode.fr" class="hover:text-white">contact@aixcode.fr</a>
+                    </p>
+                </div>
+                
+                <!-- Colonnes supplémentaires -->
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">
+                    © 2023 AixCode. Tous droits réservés.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white">Mentions légales</a>
+                    <a href="#" class="text-gray-500 hover:text-white">Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

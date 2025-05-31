@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expertises - Carrousel Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 2px;
+        }
+        
+        .gradient-border-content {
+            background: white;
+            border-radius: 14px;
+            padding: 2rem;
+            height: 100%;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-3d {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .service-3d:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Styles pour le carrousel mobile */
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            touch-action: pan-y pinch-zoom;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 85%;
+            margin-right: 1rem;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        /* Navigation arrows pour desktop */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-arrow:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .nav-arrow.prev {
+            left: -24px;
+        }
+        
+        .nav-arrow.next {
+            right: -24px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .carousel-slide {
+                flex: 0 0 calc(50% - 0.5rem);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .carousel-container {
+                overflow: visible;
+            }
+            
+            .carousel-track {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                transform: none !important;
+            }
+            
+            .carousel-slide {
+                flex: none;
+                margin-right: 0;
+            }
+            
+            .carousel-indicators,
+            .nav-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <section id="expertises" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 mb-4">Nos Expertises</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Une approche globale pour une présence digitale impactante</p>
+            </div>
+            
+            <div class="carousel-container">
+                <!-- Navigation arrows -->
+                <button class="nav-arrow prev" onclick="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-arrow next" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Service 1 -->
+                    <div class="carousel-slide">
+                        <div id="identite-marque" class="gradient-border service-3d h-full">
+                            <div class="gradient-border-content">
+                                <div class="text-blue-600 mb-6">
+                                    <i class="fas fa-palette text-5xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-blue-600 mb-4">Identité de marque</h3>
+                                <p class="text-gray-600 mb-6">Création complète de votre identité visuelle pour une reconnaissance immédiate.</p>
+                                <ul class="text-gray-600 space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Logo & charte graphique</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Guidelines marque</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Packaging & supports print</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="carousel-slide">
+                        <div id="strategie-conseil" class="glass-card p-8 service-3d h-full">
+                            <div class="text-blue-600 mb-6">
+                                <i class="fas fa-chess text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-600 mb-4">Stratégie & Conseil</h3>
+                            <p class="text-gray-600 mb-6">Positionnement clair et feuille de route digitale sur-mesure.</p>
+                            <ul class="text-gray-600 space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Audit de marque</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Stratégie de contenu</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Roadmap digitale</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="carousel-slide">
+                        <div id="digital-reseaux" class="gradient-border service-3d h-full">
+                            <div class="gradient-border-content">
+                                <div class="text-blue-600 mb-6">
+                                    <i class="fas fa-share-alt text-5xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-blue-600 mb-4">Digital & Réseaux</h3>
+                                <p class="text-gray-600 mb-6">Présence digitale optimisée et stratégie social media performante.</p>
+                                <ul class="text-gray-600 space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Sites web & e-commerce</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Social media management</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>SEO & Analytics</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="carousel-slide">
+                        <div id="marque-employeur" class="glass-card p-8 service-3d h-full">
+                            <div class="text-blue-600 mb-6">
+                                <i class="fas fa-users text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-600 mb-4">Marque Employeur</h3>
+                            <p class="text-gray-600 mb-6">Attirez et fidélisez les meilleurs talents avec une marque employeur forte.</p>
+                            <ul class="text-gray-600 space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Audit culture d'entreprise</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Contenus RH & recrutement</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Communication interne</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="carousel-slide">
+                        <div id="photo-video" class="gradient-border service-3d h-full">
+                            <div class="gradient-border-content">
+                                <div class="text-blue-600 mb-6">
+                                    <i class="fas fa-video text-5xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-blue-600 mb-4">Photo & Vidéo</h3>
+                                <p class="text-gray-600 mb-6">Contenus visuels impactants pour raconter votre histoire.</p>
+                                <ul class="text-gray-600 space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Shooting produits & équipes</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Vidéos corporate & publicitaires</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                        <span>Motion design & animation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 6 -->
+                    <div class="carousel-slide">
+                        <div id="graphisme-editorial" class="glass-card p-8 service-3d h-full">
+                            <div class="text-blue-600 mb-6">
+                                <i class="fas fa-pen-nib text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-600 mb-4">Graphisme & Éditorial</h3>
+                            <p class="text-gray-600 mb-6">Créations graphiques et contenus éditoriaux pour tous vos supports.</p>
+                            <ul class="text-gray-600 space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Supports print & digital</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Rédaction web & SEO</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span>Newsletters & emailing</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicateurs de navigation -->
+                <div class="carousel-indicators lg:hidden" id="indicators">
+                    <div class="indicator active" onclick="goToSlide(0)"></div>
+                    <div class="indicator" onclick="goToSlide(1)"></div>
+                    <div class="indicator" onclick="goToSlide(2)"></div>
+                    <div class="indicator" onclick="goToSlide(3)"></div>
+                    <div class="indicator" onclick="goToSlide(4)"></div>
+                    <div class="indicator" onclick="goToSlide(5)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        const track = document.getElementById('carouselTrack');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        // Fonction pour aller à une slide spécifique
+        function goToSlide(slideIndex) {
+            if (window.innerWidth >= 1024) return; // Pas de carrousel sur desktop
+            
+            currentSlide = slideIndex;
+            const slideWidth = slides[0].offsetWidth + 16; // largeur + margin
+            track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            
+            // Mise à jour des indicateurs
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigation avec les flèches
+        function nextSlide() {
+            if (window.innerWidth >= 1024) return;
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            if (window.innerWidth >= 1024) return;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // Gestion du swipe tactile
+        track.addEventListener('touchstart', (e) => {
+            if (window.innerWidth >= 1024) return;
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        });
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging || window.innerWidth >= 1024) return;
+            
+            currentX = e.touches[0].clientX;
+            const diffX = currentX - startX;
+            const slideWidth = slides[0].offsetWidth + 16;
+            const currentTranslate = -currentSlide * slideWidth;
+            
+            track.style.transform = `translateX(${currentTranslate + diffX}px)`;
+        });
+
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging || window.innerWidth >= 1024) return;
+            
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-in-out';
+            
+            const diffX = currentX - startX;
+            const threshold = 50; // Seuil minimum pour déclencher le swipe
+            
+            if (Math.abs(diffX) > threshold) {
+                if (diffX > 0) {
+                    // Swipe vers la droite (slide précédente)
+                    prevSlide();
+                } else {
+                    // Swipe vers la gauche (slide suivante)
+                    nextSlide();
+                }
+            } else {
+                // Retour à la position actuelle
+                goToSlide(currentSlide);
+            }
+        });
+
+        // Gestion du redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                track.style.transform = 'none';
+                currentSlide = 0;
+            } else {
+                goToSlide(currentSlide);
+            }
+        });
+
+        // Navigation automatique (optionnel)
+        let autoSlideInterval;
+        
+        function startAutoSlide() {
+            if (window.innerWidth >= 1024) return;
+            autoSlideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Démarrer le carrousel automatique sur mobile
+        if (window.innerWidth < 1024) {
+            startAutoSlide();
+        }
+
+        // Arrêter le carrousel automatique quand l'utilisateur interagit
+        track.addEventListener('touchstart', stopAutoSlide);
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', stopAutoSlide);
+        });
+
+        // Redémarrer après inactivité
+        let inactivityTimer;
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (window.innerWidth < 1024) {
+                    startAutoSlide();
+                }
+            }, 10000);
+        }
+
+        track.addEventListener('touchend', resetInactivityTimer);
+    </script>
+</body>
+</html>

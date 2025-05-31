@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AixCode | Création digitale & stratégie de marque</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vos styles CSS existants conservés -->
+    <style>
+        /* [Vos animations CSS existantes restent inchangées] */
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <!-- Header/Navigation Modifié -->
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="text-blue-600">
+                        <i class="fas fa-code text-3xl mr-2"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-600">AIXCODE</h1>
+                        <p class="text-xs text-gray-600">Stratégie digitale & création</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#accueil" class="text-blue-600 font-medium hover:text-blue-800 transition">Accueil</a>
+                    
+                    <!-- Menu Expertises -->
+                    <div class="relative group">
+                        <button class="text-gray-600 font-medium hover:text-blue-600 transition flex items-center">
+                            Expertises <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-md z-50 hidden group-hover:block">
+                            <a href="#identite-marque" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Identité de marque</a>
+                            <a href="#strategie-conseil" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Stratégie & Conseil</a>
+                            <a href="#marque-employeur" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Marque Employeur</a>
+                            <a href="#photo-video" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Photo & Vidéo</a>
+                            <a href="#graphisme-editorial" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Graphisme & Éditorial</a>
+                            <a href="#digital-reseaux" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">Digital & Réseaux Sociaux</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#portfolio" class="text-gray-600 font-medium hover:text-blue-600 transition">Réalisations</a>
+                    <a href="#apropos" class="text-gray-600 font-medium hover:text-blue-600 transition">Approche</a>
+                    <a href="#contact" class="text-gray-600 font-medium hover:text-blue-600 transition">Contact</a>
+                </nav>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#accueil" class="block py-2 text-blue-600 font-medium">Accueil</a>
+                <a href="#identite-marque" class="block py-2 text-gray-600 hover:text-blue-600">Identité de marque</a>
+                <a href="#strategie-conseil" class="block py-2 text-gray-600 hover:text-blue-600">Stratégie & Conseil</a>
+                <a href="#marque-employeur" class="block py-2 text-gray-600 hover:text-blue-600">Marque Employeur</a>
+                <a href="#photo-video" class="block py-2 text-gray-600 hover:text-blue-600">Photo & Vidéo</a>
+                <a href="#graphisme-editorial" class="block py-2 text-gray-600 hover:text-blue-600">Graphisme & Éditorial</a>
+                <a href="#digital-reseaux" class="block py-2 text-gray-600 hover:text-blue-600">Digital & Réseaux Sociaux</a>
+                <a href="#portfolio" class="block py-2 text-gray-600 hover:text-blue-600">Réalisations</a>
+                <a href="#apropos" class="block py-2 text-gray-600 hover:text-blue-600">Approche</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- [Vos sections Hero, Portfolio, About, Stats conservées telles quelles] -->
+
+    <!-- Nouvelle Section Expertises -->
+    <section id="expertises" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4">Nos Expertises</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Une approche globale pour une présence digitale impactante</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Expertise 1 -->
+                <div id="identite-marque" class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-palette text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-3">Identité de marque</h3>
+                    <p class="text-gray-600 mb-4">Création complète de votre identité visuelle pour une reconnaissance immédiate.</p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Logo & charte graphique</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Guidelines marque</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Packaging & supports print</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Expertise 2 -->
+                <div id="strategie-conseil" class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-chess text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-600 mb-3">Stratégie & Conseil</h3>
+                    <p class="text-gray-600 mb-4">Positionnement clair et feuille de route digitale sur-mesure.</p>
+                    <ul class="text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Audit de marque</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Stratégie de contenu</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Roadmap digitale</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- [Ajoutez les 4 autres expertises de la même manière...] -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact Modifiée -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl font-bold text-blue-600 mb-6">Contactez-nous</h2>
+                    <p class="text-gray-600 mb-8">18 rue Sir Alfred Garrod, 73100 Aix-les-Bains</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-600 mb-1">Téléphone</h4>
+                                <p class="text-gray-600">06 89 70 08 69</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-600 mb-1">Email</h4>
+                                <p class="text-gray-600">contact@aixcode.fr</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Intégration Calendly -->
+                        <div class="mt-8">
+                            <a href="https://calendly.com/aixcode/rdz" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition duration-300">
+                                <i class="far fa-calendar-alt mr-2"></i> Prendre rendez-vous
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- [Votre formulaire de contact existant reste inchangé] -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Modifié -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-code text-2xl mr-2 text-blue-400"></i>
+                        <h3 class="text-xl font-bold">AIXCODE</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">18 rue Sir Alfred Garrod</p>
+                    <p class="text-gray-400 mb-4">73100 Aix-les-Bains</p>
+                    <p class="text-gray-400 mb-6">contact@aixcode.fr - 06 89 70 08 69</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <!-- [Le reste de votre footer reste inchangé] -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- [Vos éléments JS existants restent inchangés] -->
+</body>
+</html>
