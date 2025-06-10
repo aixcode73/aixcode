@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire pour votre entreprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .question-card {
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .question-card.active {
+            transform: translateX(0);
+            opacity: 1;
+            position: relative;
+        }
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            transition: all 0.3s ease;
+        }
+        .progress-dot.active {
+            width: 24px;
+            border-radius: 8px;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-indigo-700 mb-2">Questionnaire Entreprise</h1>
+            <p class="text-gray-600">Ce questionnaire nous aidera à mieux comprendre votre entreprise et vos besoins. Comptez environ 10 minutes pour le compléter.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden relative min-h-[500px]">
+            <!-- Progress bar -->
+            <div class="bg-indigo-50 px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span id="current-section" class="font-medium text-indigo-700">1/12</span>
+                    <span class="text-gray-500">|</span>
+                    <span id="section-title" class="text-gray-600">Identité de l'entreprise</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div id="progress-dots" class="flex space-x-2">
+                        <!-- Dots will be added by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions container -->
+            <div class="p-6 relative min-h-[400px]">
+                <!-- Introduction card -->
+                <div id="intro-card" class="question-card active">
+                    <div class="text-center py-8">
+                        <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-clipboard-list text-indigo-600 text-3xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Prêt à commencer ?</h2>
+                        <p class="text-gray-600 mb-6">Nous allons vous poser 12 séries de questions pour mieux cerner votre entreprise et vos besoins. Vos réponses nous aideront à créer une solution parfaitement adaptée.</p>
+                        <button onclick="startQuestionnaire()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                            Commencer le questionnaire
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question cards will be inserted here by JavaScript -->
+                <div id="questions-container"></div>
+
+                <!-- Thank you card -->
+                <div id="thank-you-card" class="question-card hidden">
+                    <div class="text-center py-8">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Merci pour vos réponses !</h2>
+                        <p class="text-gray-600 mb-6">Nous avons bien reçu vos informations. Notre équipe va maintenant analyser vos besoins et vous contactera sous peu pour discuter des prochaines étapes.</p>
+                        <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-left max-w-md mx-auto">
+                            <h3 class="font-medium text-blue-800 mb-2">Prochaines étapes :</h3>
+                            <ul class="list-disc list-inside text-blue-700 space-y-1">
+                                <li>Analyse de vos réponses</li>
+                                <li>Proposition de solution</li>
+                                <li>Échange pour affiner les détails</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between border-t">
+                <button id="prev-btn" onclick="prevQuestion()" class="text-indigo-600 hover:text-indigo-800 font-medium py-2 px-4 rounded-lg transition duration-200 hidden">
+                    <i class="fas fa-arrow-left mr-2"></i>Précédent
+                </button>
+                <div class="flex-grow"></div>
+                <button id="next-btn" onclick="nextQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                    Suivant<i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                title: "Identité de l'entreprise",
+                questions: [
+                    "Quel est le nom complet de votre entreprise et sa signification ?",
+                    "Quelle est votre slogan ou phrase d'accroche ?",
+                    "Quelles sont vos valeurs fondamentales ?",
+                    "Quel est votre positionnement sur le marché (luxe, milieu de gamme, accessible) ?"
+                ]
+            },
+            {
+                title: "Services & Produits",
+                questions: [
+                    "Quels services proposez-vous exactement (liste complète) ?",
+                    "Proposez-vous des forfaits ou abonnements ?",
+                    "Avez-vous des produits à vendre en complément (soins, mascara...) ?",
+                    "Quels sont vos services/produits les plus populaires ?"
+                ]
+            },
+            {
+                title: "Cible clients",
+                questions: [
+                    "Quelle est votre clientèle principale (âge, genre, profil) ?",
+                    "Viennent-elles surtout pour des occasions spéciales ou de l'entretien régulier ?",
+                    "Quelle est la zone géographique de votre clientèle ?"
+                ]
+            },
+            {
+                title: "Différenciation concurrentielle",
+                questions: [
+                    "Qu'est-ce qui vous distingue de vos concurrents ?",
+                    "Utilisez-vous des techniques ou produits particuliers ?",
+                    "Avez-vous des certifications ou formations spécifiques ?"
+                ]
+            },
+            {
+                title: "Expérience client",
+                questions: [
+                    "Comment se déroule une première visite type ?",
+                    "Proposez-vous des conseils personnalisés ?",
+                    "Quel environnement souhaitez-vous créer dans votre institut ?"
+                ]
+            },
+            {
+                title: "Objectifs du site web",
+                questions: [
+                    "Souhaitez-vous plutôt : Présenter votre travail ? Convertir en prises de RDV ? Vendre des produits en ligne ?",
+                    "Avez-vous des exemples de sites que vous aimez ?"
+                ]
+            },
+            {
+                title: "Style visuel",
+                questions: [
+                    "Avez-vous une charte graphique existante ?",
+                    "Des couleurs à privilégier/éviter ?",
+                    "Un style particulier (minimaliste, élégant, moderne...) ?"
+                ]
+            },
+            {
+                title: "Contraintes techniques",
+                questions: [
+                    "Avez-vous besoin d'intégrer : Un système de réservation ? Un paiement en ligne ? Un portfolio interactif ?"
+                ]
+            },
+            {
+                title: "Contenu existant",
+                questions: [
+                    "Avez-vous déjà : Des photos professionnelles de vos réalisations ? Des témoignages clients ? Un book ou portfolio ?"
+                ]
+            },
+            {
+                title: "Gestion du site",
+                questions: [
+                    "Qui s'occupera des mises à jour ?",
+                    "Avez-vous besoin d'une formation pour gérer le contenu ?"
+                ]
+            },
+            {
+                title: "Référencement",
+                questions: [
+                    "Quels mots-clés doivent absolument apparaître ?",
+                    "Avez-vous déjà travaillé votre référencement local ?"
+                ]
+            },
+            {
+                title: "Budget & Délais",
+                questions: [
+                    "Quel est votre budget pour ces améliorations ?",
+                    "Avez-vous une deadline particulière ?"
+                ]
+            }
+        ];
+
+        let currentSection = 0;
+        let answers = Array(questions.length).fill().map(() => []);
+
+        // Initialize the questionnaire
+        function initQuestionnaire() {
+            // Create progress dots
+            const progressDots = document.getElementById('progress-dots');
+            questions.forEach((section, index) => {
+                const dot = document.createElement('div');
+                dot.className = `progress-dot rounded-full ${index === 0 ? 'bg-indigo-600 active' : 'bg-gray-300'}`;
+                dot.dataset.index = index;
+                progressDots.appendChild(dot);
+            });
+
+            // Create question cards
+            const container = document.getElementById('questions-container');
+            questions.forEach((section, sectionIndex) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `section-${sectionIndex}`;
+                
+                let questionsHTML = '';
+                section.questions.forEach((question, qIndex) => {
+                    questionsHTML += `
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">${question}</label>
+                            <textarea 
+                                id="q-${sectionIndex}-${qIndex}" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 transition duration-200"
+                                oninput="saveAnswer(${sectionIndex}, ${qIndex}, this.value)"
+                            >${answers[sectionIndex][qIndex] || ''}</textarea>
+                        </div>
+                    `;
+                });
+                
+                card.innerHTML = `
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">${section.title}</h2>
+                    ${questionsHTML}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Start the questionnaire
+        function startQuestionnaire() {
+            document.getElementById('intro-card').classList.remove('active');
+            document.getElementById('section-0').classList.add('active');
+            document.getElementById('prev-btn').classList.remove('hidden');
+            updateProgress();
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentSection === questions.length - 1) {
+                // Show thank you card
+                document.getElementById(`section-${currentSection}`).classList.remove('active');
+                document.getElementById('thank-you-card').classList.add('active');
+                document.getElementById('thank-you-card').classList.remove('hidden');
+                document.getElementById('next-btn').classList.add('hidden');
+                document.getElementById('prev-btn').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById(`section-${currentSection}`).classList.remove('active');
+            currentSection++;
+            document.getElementById(`section-${currentSection}`).classList.add('active');
+            
+            updateProgress();
+            
+            if (currentSection === questions.length - 1) {
+                document.getElementById('next-btn').innerHTML = 'Terminer<i class="fas fa-check ml-2"></i>';
+            }
+            
+            document.getElementById('prev-btn').classList.remove('hidden');
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (document.getElementById('thank-you-card').classList.contains('active')) {
+                document.getElementById('thank-you-card').classList.remove('active');
+                document.getElementById('thank-you-card').classList.add('hidden');
+                document.getElementById(`section-${currentSection}`).classList.add('active');
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('next-btn').innerHTML = 'Terminer<i class="fas fa-check ml-2"></i>';
+                return;
+            }
+
+            document.getElementById(`section-${currentSection}`).classList.remove('active');
+            currentSection--;
+            document.getElementById(`section-${currentSection}`).classList.add('active');
+            
+            updateProgress();
+            
+            if (currentSection === 0) {
+                document.getElementById('prev-btn').classList.add('hidden');
+            }
+            
+            document.getElementById('next-btn').innerHTML = 'Suivant<i class="fas fa-arrow-right ml-2"></i>';
+        }
+
+        // Update progress indicators
+        function updateProgress() {
+            document.getElementById('current-section').textContent = `${currentSection + 1}/${questions.length}`;
+            document.getElementById('section-title').textContent = questions[currentSection].title;
+            
+            // Update progress dots
+            document.querySelectorAll('#progress-dots .progress-dot').forEach((dot, index) => {
+                dot.classList.remove('bg-indigo-600', 'active', 'bg-gray-300');
+                if (index < currentSection) {
+                    dot.classList.add('bg-indigo-600');
+                } else if (index === currentSection) {
+                    dot.classList.add('bg-indigo-600', 'active');
+                } else {
+                    dot.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+        // Save answer to memory
+        function saveAnswer(sectionIndex, questionIndex, value) {
+            if (!answers[sectionIndex]) answers[sectionIndex] = [];
+            answers[sectionIndex][questionIndex] = value;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initQuestionnaire);
+    </script>
+</body>
+</html>
